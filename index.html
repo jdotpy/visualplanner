@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="static/css/scheduler.css">
+	</head>
+	<body>
+		<h2>Plan</h2>
+		<div ng-app="VisualPlanner" ng-controller="GanttView" id="GanttWrapper">
+			<!-- Calendar -->
+			<div class="calendarBox">
+				<div class="week" ng-repeat="week in schedule" ng-style="weekStyle()">
+					<span class="weekLabel" ng-style="weekStyle()">(( week.label ))</span>
+					<div class="day" ng-repeat="day in week.days" ng-style="dayStyle()" ng-class="{currentDay:isCurrentDay(day.obj)}">
+						(( day.monthName ))<br>
+						(( day.obj.getDate() ))	
+					</div>	
+				</div>	
+			</div>
+			<!-- Workers -->
+			<div class="workerWrapper">
+				<div class="worker" ng-repeat="worker in workers">
+					<span class="workerLabel">(( worker.label ))</span>
+					<div class="assignment" ng-repeat="assignment in getWorkerAssignments(worker)"></div>	
+				</div>
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+		<script src="static/js/visualplanner.js"></script>	
+	</body>
+</html>
